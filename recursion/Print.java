@@ -24,6 +24,7 @@ public class Print {
         System.out.println();
     }
 
+    //Tree node 
     static class TreeNode {
         TreeNode left, right;
         int val;
@@ -34,6 +35,8 @@ public class Print {
         }
     }
 
+
+    //print 1 to n
     public static void print(int n) {
         if (n == 1) {
             System.out.println(n);
@@ -43,6 +46,8 @@ public class Print {
         System.out.println(n);
     }
 
+
+    //print n to 1
     public static void printReverse(int n) {
         if (n == 1) {
             System.out.println(n);
@@ -53,6 +58,8 @@ public class Print {
         printReverse(n - 1);
     }
 
+
+    //height of binary tree
     public static int height(TreeNode root) {
         if (root == null) {
             return 0;
@@ -63,6 +70,8 @@ public class Print {
         return Math.max(left, right) + 1;
     }
 
+
+    //sort array using recursion plus loop
     public static int[] sortA(int[] arr, int index) {
         if (index <= 0) {
             return arr;
@@ -80,6 +89,8 @@ public class Print {
         return newArr;
     }
 
+
+    //sort using pure recursion
     public static void sort(List<Integer> list) {
         if (list.size() == 1) {
             return;
@@ -90,6 +101,9 @@ public class Print {
         insert(list, temp);
     }
 
+
+
+    //insert for sort
     public static void insert(List<Integer> list, int temp) {
         if (list.size() == 0 || list.get(list.size() - 1) <= temp) {
             list.add(temp);
@@ -102,6 +116,8 @@ public class Print {
         return;
     }
 
+
+    //sort stack using recursion
     public static void sortStack(Stack<Integer> stack) {
         if (stack.size() == 1) {
             return;
@@ -111,6 +127,8 @@ public class Print {
         insertStack(stack, temp);
     }
 
+
+    //insert for sorting stack
     public static void insertStack(Stack<Integer> stack, int temp) {
         if (stack.size() == 0 || stack.peek() <= temp) {
             stack.push(temp);
@@ -122,6 +140,8 @@ public class Print {
         return;
     }
 
+
+    //deleting middle element of stack 
     public static Stack<Integer> deleteMiddleOfStack(Stack<Integer> stack, int k) {
         if (stack.isEmpty() || k > stack.size()) {
             return stack;
@@ -139,13 +159,47 @@ public class Print {
         return stack;
     }
 
-    public static void reverseStack(Stack<Integer> stack){
+
+    //revrse of the given stack
+    public static void reverseStack(Stack<Integer> stack) {
+        if(stack.size()==1){
+            return;
+        }
+
+        int temp=stack.pop();
+        reverseStack(stack);
+        insertIntoStack(stack, temp);
+    
+    }
+
+
+    //helper(insert method) for reverse of stack
+    public static void insertIntoStack(Stack<Integer> stack, int temp){
         if(stack.isEmpty()){
+            stack.push(temp);
             return;
         }
         int val=stack.pop();
-        reverseStack(stack);
+        insertIntoStack(stack, temp);
         stack.push(val);
+        return;
     }
+
+
+    //https://leetcode.com/problems/k-th-symbol-in-grammar/
+    //Using recursion
+    public static int kthSymbolInGrammer(int n, int k){
+        if(n==1 && k==1){
+            return 0;
+        }
+
+        int mid=(int)Math.pow(2, n-1)/2;
+        if(k<=mid){
+            return kthSymbolInGrammer(n-1, k);
+        }else{
+            return kthSymbolInGrammer(n-1, k-mid)==1?0:1;
+        }
+    }
+
 
 }
